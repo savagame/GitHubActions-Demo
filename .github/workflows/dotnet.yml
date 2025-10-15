@@ -20,7 +20,7 @@ jobs:
     - name: Setup .NET 6.0.x
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: matrix.dotnet-version
+        dotnet-version: ${{ matrix.dotnet-version }}
         cache: true
     - name: Display .Net version
       run: dotnet --version
