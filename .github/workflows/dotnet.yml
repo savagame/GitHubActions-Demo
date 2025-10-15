@@ -1,5 +1,3 @@
-# This workflow will build a .NET project
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
 
 name: dotnet package
 
@@ -27,7 +25,7 @@ jobs:
     - name: Install Dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build --no-retore
+      run: dotnet build --no-restore
     - name: Test with dotnet
       run: dotnet test --no-restore --logger trx --results-directory "TestResult-${{ matrix.dotnet-version }}"
     - name: Upload dotnet test results
