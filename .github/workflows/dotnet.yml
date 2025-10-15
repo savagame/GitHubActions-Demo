@@ -11,18 +11,29 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        dotnet-version: [ '3.1', '6.0.x' ]
-
+        dotnet-version: [ '3.1.x', '6.0.x' ]
     steps:
-    - uses: actions/checkout@v4
-    - name: Setup .NET ${{ matrix.dotnet-version }}
+    - uses: actions/checkout@v5
+    - name: Setup .NET 6.0.x
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: ${{ matrix.dotnet-version }}
+        dotnet-version: matrix.dotnet-version
+        cache: true
     - name: Display .Net version
       run: dotnet --version
+    - name: Install Dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --no-retore
+    - name: Test with dotnet
+      run: dotnet test --no-restore --logger trx --results-directory "TestResult-${{ matrix.dotnet-version }}"
+    - name: Upload dotnet test results
+      uses: actions/upload-artifacts@v4
+      with:
+        name: dotnet-result-${{ matrix.dotnet-version }}
+        path: TestResult-${{ matrix.dotnet-version }}
+      if: ${{ always() }}
      
