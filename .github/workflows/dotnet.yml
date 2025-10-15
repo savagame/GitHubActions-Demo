@@ -31,7 +31,7 @@ jobs:
     - name: Test with dotnet
       run: dotnet test --no-restore --logger trx --results-directory "TestResult-${{ matrix.dotnet-version }}"
     - name: Upload dotnet test results
-      uses: actions/upload-artifacts@v4
+      uses: actions/upload-artifact@v4
       with:
         name: dotnet-result-${{ matrix.dotnet-version }}
         path: TestResult-${{ matrix.dotnet-version }}
