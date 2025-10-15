@@ -15,14 +15,14 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        donet-version: [ '3.1', '6.0.x' ]
+        dotnet-version: [ '3.1', '6.0.x' ]
 
     steps:
     - uses: actions/checkout@v4
-    - name: Setup .NET ${{ matrix.donet-version }}
+    - name: Setup .NET ${{ matrix.dotnet-version }}
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: ${{ matrix.donet-version }}
+        dotnet-version: ${{ matrix.dotnet-version }}
     - name: Display .Net version
-      run: donet --version
+      run: dotnet --version
      
